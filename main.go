@@ -8,6 +8,9 @@ import (
 	"net/http"
 )
 
+// 4kb で設定
+const bufferSize = 4096
+
 func handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 	if r.Header.Get("Connection") != "Upgrade" || r.Header.Get("Upgrade") != "websocket" {
 		fmt.Println("error")
@@ -33,6 +36,18 @@ func handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 	readWriter.WriteString("Sec-WebSocket-Accept: " + acceptKey + "\r\n")
 	readWriter.WriteString("\r\n") // 空白行でステータスラインの終わりを示す
 	readWriter.Flush()
+
+	data := make([]byte, bufferSize)
+	for {
+		frame := Frame{}
+		n, err := readWriter.Read(data)
+		if err != nil {
+			panic(err)
+		}
+
+		frame.parse(data[:n])
+		fmt.Println(string(frame.payloadData))
+	}
 }
 
 func buildAcceptKey(key string) string {

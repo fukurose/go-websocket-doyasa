@@ -7,7 +7,7 @@
 
         // WebSocket 通信が確立した時に発火するイベント
         socket.addEventListener('open', event => {
-          console.log("upgraded!!");
+          socket.send('どやさ');
         });
       });
     </script>
