@@ -9,6 +9,11 @@
         socket.addEventListener('open', event => {
           socket.send('どやさ');
         });
+
+        // サーバーからメッセージを受信した時に発火するイベント
+        socket.addEventListener('message',  event => {
+          console.log(event.data);
+        });
       });
     </script>
     <title>Web Sokect DOYASA</title>

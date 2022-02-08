@@ -37,6 +37,10 @@ func handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 	readWriter.WriteString("\r\n") // 空白行でステータスラインの終わりを示す
 	readWriter.Flush()
 
+	sendFrame := buildFrame("どやさ")
+	readWriter.Write(sendFrame.toBytes())
+	readWriter.Flush()
+
 	data := make([]byte, bufferSize)
 	for {
 		frame := Frame{}
