@@ -2,8 +2,13 @@
   <head>
     <script>
       document.addEventListener('DOMContentLoaded', event => {
-        // ブラウザからハンドシェイクを開始する
-        new WebSocket('ws://localhost:3000/websocket');
+        // ブラウザからハンドシェイクを送る
+        const socket = new WebSocket('ws://localhost:3000/websocket');
+
+        // WebSocket 通信が確立した時に発火するイベント
+        socket.addEventListener('open', event => {
+          console.log("upgraded!!");
+        });
       });
     </script>
     <title>Web Sokect DOYASA</title>
