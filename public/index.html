@@ -14,11 +14,17 @@
         socket.addEventListener('message',  event => {
           console.log(event.data);
         });
+
+        const button = document.querySelector('button');
+        button.addEventListener('click', event => {
+          socket.send('どやさ');
+        });
       });
     </script>
     <title>Web Sokect DOYASA</title>
   </head>
   <body>
     <h1>WebSocket Test Client</h1>
+    <button>どやさ</button>
   </body>
 </html>
