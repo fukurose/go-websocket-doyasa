@@ -1,5 +1,11 @@
 <html>
   <head>
+    <script>
+      document.addEventListener('DOMContentLoaded', event => {
+        // ブラウザからハンドシェイクを開始する
+        new WebSocket('ws://localhost:3000/websocket');
+      });
+    </script>
     <title>Web Sokect DOYASA</title>
   </head>
   <body>
